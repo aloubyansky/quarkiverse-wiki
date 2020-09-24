@@ -1,0 +1,26 @@
+# This workflow simply syncs the wiki repo to real wiki.
+
+name: sync-to-wiki
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Commit files
+      run: |
+        mkdir sync
+        cd sync
+        git init
+        git config --local user.email "quarkusbot@xam.dk"
+        git config --local user.name "quarkusbot"
+        git remote add origin https://${{secrets.WIKI_USER}}:${{secrets.WIKI_PAT}}@github.com/quarkiverse/quarkiverse-wiki.git
+        git remote add upstream https://${{secrets.WIKI_USER}}:${{secrets.WIKI_PAT}}@github.com/quarkiverse/quarkiverse.wiki.git
+        git fetch origin
+        git fetch upstream
+        git merge origin/master --no-edit
+        git push origin HEAD:master
+        git push upstream HEAD:master
