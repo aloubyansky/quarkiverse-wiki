@@ -1,6 +1,9 @@
 # Joining Quarkiverse
 
+**INFO** this content is still a draft - feedback welcome!
+
 Projects hosted in the Quarkiverse organization on github should respect the following conventions and policies.
+
 
 ## Repository name
 
